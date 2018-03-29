@@ -3,14 +3,14 @@ const router = express.Router();
 const Ninja = require('../model/ninja')
 
 //get a list of db
-router.get('/ninja', function (req, res) {
+router.get('/ninja', function (req, res, next) {
   res.send({
     type: 'GET'
   })
 })
 
 //add new a list to the db
-router.post('/ninja', function (req, res) {
+router.post('/ninja', function (req, res, next) {
   // receive object from Ninja Schema
   // var ninja = new Ninja(req.body)
   // save to database
@@ -23,17 +23,17 @@ router.post('/ninja', function (req, res) {
     //   name: ninja.name,
     //   skill: req.body.skill
     // })
-  })
+  }).catch(next)
 })
 
 //update a list in the db
-router.put('/ninja/:id', function (req, res) {
+router.put('/ninja/:id', function (req, res, next) {
   res.send({
     type: 'PUT'
   })
 })
 
-router.delete('/ninja/:id', function (req, res) {
+router.delete('/ninja/:id', function (req, res, next) {
   res.send({
     type: 'DELETE'
   })
