@@ -28,9 +28,21 @@ router.post('/ninja', function (req, res, next) {
 
 //update a list in the db
 router.put('/ninja/:id', function (req, res, next) {
-  res.send({
-    type: 'PUT'
-  })
+  Ninja.findByIdAndUpdate({
+      _id: req.params.id,
+    },
+    req.body
+  ).then(() => {
+    // for response value in updated object
+    Ninja.findOne({
+      _id: req.params.id
+    }).then(ninja => {
+      res.send(ninja)
+    })
+  }).catch(next)
+  // res.send({
+  //   type: 'PUT'
+  // })
 })
 
 router.delete('/ninja/:id', function (req, res, next) {
